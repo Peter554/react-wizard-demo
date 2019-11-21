@@ -1,8 +1,7 @@
 import React from 'react'
-import * as yup from 'yup'
-import { useFormik } from 'formik'
+import { UseFormik } from 'formik'
+import { Volume2 } from 'react-feather'
 
-import { paymentDetailsFormSchema } from './formSchema'
 import { WizardStep } from '../layout/WizardStep'
 import { AppInput } from '../layout/AppInput'
 import { AppLabel } from '../layout/AppLabel'
@@ -16,30 +15,15 @@ import {
   AppMutedButton,
   PaddedButtonText,
 } from '../layout/Buttons'
-import { Volume2 } from 'react-feather'
-
-export type TPaymentDetailsData = yup.InferType<typeof paymentDetailsFormSchema>
+import { TPaymentDetailsData } from './formiks'
 
 type TProps = {
-  onSubmit: (data: TPaymentDetailsData) => void
-  onBack: () => void
   visible: boolean
+  formik: UseFormik<TPaymentDetailsData>
+  onBack: () => void
 }
 
-export default ({ onSubmit, onBack, visible }: TProps) => {
-  const formik = useFormik<TPaymentDetailsData>({
-    initialValues: {
-      creditCardNumber: '',
-      creditCardExpires: '',
-      creditCardSecurityCode: '',
-    },
-    validationSchema: paymentDetailsFormSchema,
-    onSubmit: data => {
-      data = paymentDetailsFormSchema.cast(data)
-      onSubmit(data)
-    },
-  })
-
+export default ({ visible, formik, onBack }: TProps) => {
   return (
     <WizardStep visible={visible}>
       <AppH2>Payment details</AppH2>

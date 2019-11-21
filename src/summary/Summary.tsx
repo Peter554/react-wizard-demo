@@ -1,31 +1,41 @@
 import React from 'react'
+import { UseFormik } from 'formik'
+import styled from 'styled-components'
 
-import { TCollector } from '../useCollector'
+import { TStep } from '../useStep'
+import {
+  TSubscriptionOptionsData,
+  TUserDetailsData,
+  TPaymentDetailsData,
+} from '../steps/formiks'
 import { AppH2 } from '../layout/AppHeadings'
 import { AppHr } from '../layout/AppHr'
-import { TPrice } from '../usePrice'
-import styled from 'styled-components'
 import { SubscriptionSummary } from './SubscriptionSummary'
 import { UserSummary } from './UserSummary'
 import { PaymentDetailsSummary } from './PaymentDetailsSummary'
 
 type TProps = {
-  price: TPrice
-  collector: TCollector
+  step: TStep
+  subscriptionOptionsFormik: UseFormik<TSubscriptionOptionsData>
+  userDetailsFormik: UseFormik<TUserDetailsData>
+  paymentDetailsFormik: UseFormik<TPaymentDetailsData>
 }
 
-export default ({ price, collector }: TProps) => {
+export default ({
+  step,
+  subscriptionOptionsFormik,
+  userDetailsFormik,
+  paymentDetailsFormik,
+}: TProps) => {
   return (
     <React.Fragment>
       <AppHr />
       <AppH2>Order summary</AppH2>
       <SummarySections>
-        <SubscriptionSummary data={price.value} />
-        {collector.value.data.userDetails && (
-          <UserSummary data={collector.value.data.userDetails} />
-        )}
-        {collector.value.data.paymentDetails && (
-          <PaymentDetailsSummary data={collector.value.data.paymentDetails} />
+        <SubscriptionSummary data={subscriptionOptionsFormik.values} />
+        {step.value > 2 && <UserSummary data={userDetailsFormik.values} />}
+        {step.value > 3 && (
+          <PaymentDetailsSummary data={paymentDetailsFormik.values} />
         )}
       </SummarySections>
     </React.Fragment>

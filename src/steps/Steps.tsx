@@ -1,57 +1,56 @@
 import React from 'react'
+import { UseFormik } from 'formik'
 
+import { TStep } from '../useStep'
+import {
+  TSubscriptionOptionsData,
+  TUserDetailsData,
+  TPaymentDetailsData,
+  TTermsAndConditionsData,
+} from './formiks'
 import SubscriptionOptions from './SubscriptionOptions'
 import UserDetails from './UserDetails'
 import PaymentDetails from './PaymentDetails'
 import TermsAndConditions from './TermsAndConditions'
-import { TCollector } from '../useCollector'
-import { TStep } from '../useStep'
-import { TPrice } from '../usePrice'
 
 type TProps = {
   step: TStep
-  collector: TCollector
-  price: TPrice
+  subscriptionOptionsFormik: UseFormik<TSubscriptionOptionsData>
+  userDetailsFormik: UseFormik<TUserDetailsData>
+  paymentDetailsFormik: UseFormik<TPaymentDetailsData>
+  termsAndConditionsFormik: UseFormik<TTermsAndConditionsData>
 }
 
-export default ({ step, collector, price }: TProps) => {
+export default ({
+  step,
+  subscriptionOptionsFormik,
+  userDetailsFormik,
+  paymentDetailsFormik,
+  termsAndConditionsFormik,
+}: TProps) => {
   return (
     <React.Fragment>
       <SubscriptionOptions
         visible={step.value === 1}
-        updatePrice={price.updatePrice}
-        onSubmit={data => {
-          collector.collectSubscriptionOptions(data)
-          step.nextStep()
-        }}
+        formik={subscriptionOptionsFormik}
       />
       <UserDetails
         visible={step.value === 2}
-        onSubmit={data => {
-          collector.collectUserDetails(data)
-          step.nextStep()
-        }}
+        formik={userDetailsFormik}
         onBack={() => {
-          collector.collectUserDetails()
           step.previousStep()
         }}
       />
       <PaymentDetails
         visible={step.value === 3}
-        onSubmit={data => {
-          collector.collectPaymentDetails(data)
-          step.nextStep()
-        }}
+        formik={paymentDetailsFormik}
         onBack={() => {
-          collector.collectPaymentDetails()
           step.previousStep()
         }}
       />
       <TermsAndConditions
         visible={step.value === 4}
-        onSubmit={data => {
-          collector.collectTermsAndConditions(data)
-        }}
+        formik={termsAndConditionsFormik}
         onBack={() => {
           step.previousStep()
         }}

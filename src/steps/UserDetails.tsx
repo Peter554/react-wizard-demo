@@ -1,9 +1,7 @@
 import React from 'react'
-import * as yup from 'yup'
-import { useFormik } from 'formik'
+import { UseFormik } from 'formik'
 import { Volume2 } from 'react-feather'
 
-import { userDetailsFormSchema } from './formSchema'
 import { WizardStep } from '../layout/WizardStep'
 import { AppInput } from '../layout/AppInput'
 import { AppLabel } from '../layout/AppLabel'
@@ -18,30 +16,15 @@ import {
   PaddedButtonText,
 } from '../layout/Buttons'
 import { AppTextArea } from '../layout/AppTextArea'
-
-export type TUserDetailsData = yup.InferType<typeof userDetailsFormSchema>
+import { TUserDetailsData } from './formiks'
 
 type TProps = {
-  onSubmit: (data: TUserDetailsData) => void
-  onBack: () => void
   visible: boolean
+  formik: UseFormik<TUserDetailsData>
+  onBack: () => void
 }
 
-export default ({ onSubmit, onBack, visible }: TProps) => {
-  const formik = useFormik<TUserDetailsData>({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      emailAddress: '',
-      streetAddress: '',
-    },
-    validationSchema: userDetailsFormSchema,
-    onSubmit: data => {
-      data = userDetailsFormSchema.cast(data)
-      onSubmit(data)
-    },
-  })
-
+export default ({ visible, formik, onBack }: TProps) => {
   return (
     <WizardStep visible={visible}>
       <AppH2>Your details</AppH2>

@@ -6,15 +6,21 @@ import {
   SummarySectionValue,
   Muted,
 } from './Summary'
+import { TSubscriptionOptionsData } from '../steps/formiks'
 
-import { TPriceValue } from '../usePrice'
+export const SubscriptionSummary = ({
+  data,
+}: {
+  data: TSubscriptionOptionsData
+}) => {
+  const basicPrice = 2 * data.amountGB * data.durationMonths
+  const total = data.payUpfront ? 0.9 * basicPrice : basicPrice
 
-export const SubscriptionSummary = ({ data }: { data: TPriceValue }) => {
   return (
     <SummarySection>
       <SummarySectionKey>Price: </SummarySectionKey>
       <SummarySectionValue>
-        <div>${data.total}</div>
+        <div>${total}</div>
         <div>
           <Muted>
             {' '}
@@ -25,7 +31,6 @@ export const SubscriptionSummary = ({ data }: { data: TPriceValue }) => {
             ) : (
               <span>to be paid later</span>
             )}
-            
           </Muted>
         </div>
       </SummarySectionValue>
