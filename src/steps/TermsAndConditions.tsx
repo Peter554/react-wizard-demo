@@ -14,9 +14,9 @@ import {
   AppMutedButton,
   PaddedButtonText,
 } from '../layout/Buttons'
-import { AppCheckbox, AppCheckboxContainer } from '../layout/AppCheckbox'
 import { AppDownload } from '../layout/AppDownload'
 import { TTermsAndConditionsData } from './formiks'
+import { AppCustomCheckbox } from '../layout/AppCustomCheckbox'
 
 type TProps = {
   visible: boolean
@@ -35,18 +35,12 @@ export default ({ visible, formik, onBack }: TProps) => {
 
       <AppForm id="terms-form" onSubmit={formik.handleSubmit}>
         <AppFormGroup>
-          <AppCheckboxContainer>
-            <AppCheckbox
-              id="terms-accepted"
-              name="acceptedTerms"
-              value={formik.values.acceptedTerms as any}
-              onChange={formik.handleChange}
-              valid={
-                !(formik.touched.acceptedTerms && formik.errors.acceptedTerms)
-              }
-            />
-            <AppLabel htmlFor="terms-accepted">Accept terms?</AppLabel>
-          </AppCheckboxContainer>
+          <AppCustomCheckbox
+            id="terms-accepted"
+            name="acceptedTerms"
+            formik={formik}
+            label="Accept terms?"
+          />
           <AppValidationError>
             {formik.touched.acceptedTerms && formik.errors.acceptedTerms}
           </AppValidationError>
