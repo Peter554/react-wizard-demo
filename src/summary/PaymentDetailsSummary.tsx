@@ -7,7 +7,7 @@ import {
   SummarySectionValue,
   Muted,
 } from './Summary'
-import { TPaymentDetailsData } from '../steps/PaymentDetails'
+import { TPaymentDetailsData } from '../steps/formiks'
 
 export const PaymentDetailsSummary = ({
   data,

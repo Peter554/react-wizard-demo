@@ -6,8 +6,7 @@ import {
   SummarySectionValue,
   Muted,
 } from './Summary'
-
-import { TUserDetailsData } from '../steps/UserDetails'
+import { TUserDetailsData } from '../steps/formiks'
 
 export const UserSummary = ({ data }: { data: TUserDetailsData }) => {
   return (

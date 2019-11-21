@@ -1,47 +1,65 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { Music } from 'react-feather'
 
 import useStep from './useStep'
-import useCollector from './useCollector'
-
+import {
+  useUserDetailsFormik,
+  usePaymentDetailsFormik,
+  useTermsAndConditionsFormik,
+  useSubscriptionOptionsFormik,
+} from './steps/formiks'
 import Main from './layout/Main'
 import Steps from './steps/Steps'
 import Summary from './summary/Summary'
+import { Greeting } from './Greeting'
 
 import './css/reset.css'
 import './css/global.css'
 import { theme } from './theme'
-import { AppH1 } from './layout/AppHeadings'
-import { AppHr } from './layout/AppHr'
-import { usePrice } from './usePrice'
 
 export default () => {
-  const collector = useCollector()
   const step = useStep()
-  const price = usePrice()
 
-  useEffect(() => {
-    if (collector.value.done) {
-      console.log(JSON.stringify(collector.value.data, null, 2))
-      alert('Your form has now been submitted.')
+  const subscriptionOptionsFormik = useSubscriptionOptionsFormik(() => {
+    step.nextStep()
+  })
+
+  const userDetailsFormik = useUserDetailsFormik(() => {
+    step.nextStep()
+  })
+
+  const paymentDetailsFormik = usePaymentDetailsFormik(() => {
+    step.nextStep()
+  })
+
+  const termsAndConditionsFormik = useTermsAndConditionsFormik(() => {
+    const toLog = {
+      subscriptionOptions: subscriptionOptionsFormik.values,
+      userDetails: userDetailsFormik.values,
+      paymentDetails: paymentDetailsFormik.values,
+      termsAndConditions: termsAndConditionsFormik.values,
     }
-  }, [collector.value])
+    console.log(JSON.stringify(toLog, null, 2))
+    alert('Your form has now been submitted.')
+  })
 
   return (
     <ThemeProvider theme={theme}>
       <Main>
-        <AppH1>
-          MoBeats <Music size="1.75rem" color={theme.colors.primary} /> sign up
-        </AppH1>
-        <p>
-          Thanks for signing up to MoBeats! Just fill out this form and we'll
-          get you up and running in no time. You'll be changed $2 per month per
-          GB. And there's a 10% discount if you can make the payment now!
-        </p>
-        <AppHr />
-        <Steps step={step} collector={collector} price={price} />
-        <Summary price={price} collector={collector} />
+        <Greeting />
+        <Steps
+          step={step}
+          subscriptionOptionsFormik={subscriptionOptionsFormik}
+          userDetailsFormik={userDetailsFormik}
+          paymentDetailsFormik={paymentDetailsFormik}
+          termsAndConditionsFormik={termsAndConditionsFormik}
+        />
+        <Summary
+          step={step}
+          subscriptionOptionsFormik={subscriptionOptionsFormik}
+          userDetailsFormik={userDetailsFormik}
+          paymentDetailsFormik={paymentDetailsFormik}
+        />
       </Main>
     </ThemeProvider>
   )

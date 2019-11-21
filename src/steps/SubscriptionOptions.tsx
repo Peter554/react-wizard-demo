@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
-import * as yup from 'yup'
-import { useFormik } from 'formik'
+import React from 'react'
+import { UseFormik } from 'formik'
 import { Volume2 } from 'react-feather'
 
-import { subscriptionOptionsFormSchema } from './formSchema'
 import { WizardStep } from '../layout/WizardStep'
 import { AppLabel } from '../layout/AppLabel'
 import { AppFormGroup } from '../layout/AppFormGroup'
@@ -17,35 +15,14 @@ import {
 } from '../layout/Buttons'
 import { AppSelect } from '../layout/AppSelect'
 import { AppCheckbox, AppCheckboxContainer } from '../layout/AppCheckbox'
-
-export type TSubscriptionOptionsData = yup.InferType<
-  typeof subscriptionOptionsFormSchema
->
+import { TSubscriptionOptionsData } from './formiks'
 
 type TProps = {
-  onSubmit: (data: TSubscriptionOptionsData) => void
-  updatePrice: (data: TSubscriptionOptionsData) => void
   visible: boolean
+  formik: UseFormik<TSubscriptionOptionsData>
 }
 
-export default ({ onSubmit, visible, updatePrice }: TProps) => {
-  const formik = useFormik<TSubscriptionOptionsData>({
-    initialValues: {
-      durationMonths: 12,
-      amountGB: 5,
-      payUpfront: false,
-    },
-    validationSchema: subscriptionOptionsFormSchema,
-    onSubmit: data => {
-      data = subscriptionOptionsFormSchema.cast(data)
-      onSubmit(data)
-    },
-  })
-
-  useEffect(() => {
-    updatePrice(subscriptionOptionsFormSchema.cast(formik.values))
-  }, [formik.values])
-
+export default ({ visible, formik }: TProps) => {
   return (
     <WizardStep visible={visible}>
       <AppH2>Subscription options</AppH2>

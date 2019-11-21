@@ -1,8 +1,7 @@
 import React from 'react'
-import * as yup from 'yup'
-import { useFormik } from 'formik'
+import { UseFormik } from 'formik'
+import { Volume2 } from 'react-feather'
 
-import { termsAndConditionsFormSchema } from './formSchema'
 import { WizardStep } from '../layout/WizardStep'
 import { AppLabel } from '../layout/AppLabel'
 import { AppFormGroup } from '../layout/AppFormGroup'
@@ -17,30 +16,15 @@ import {
 } from '../layout/Buttons'
 import { AppCheckbox, AppCheckboxContainer } from '../layout/AppCheckbox'
 import { AppDownload } from '../layout/AppDownload'
-import { Volume2 } from 'react-feather'
-
-export type TTermsAndConditionsData = yup.InferType<
-  typeof termsAndConditionsFormSchema
->
+import { TTermsAndConditionsData } from './formiks'
 
 type TProps = {
-  onSubmit: (data: TTermsAndConditionsData) => void
-  onBack: () => void
   visible: boolean
+  formik: UseFormik<TTermsAndConditionsData>
+  onBack: () => void
 }
 
-export default ({ onSubmit, onBack, visible }: TProps) => {
-  const formik = useFormik<TTermsAndConditionsData>({
-    initialValues: {
-      acceptedTerms: false,
-    },
-    validationSchema: termsAndConditionsFormSchema,
-    onSubmit: data => {
-      data = termsAndConditionsFormSchema.cast(data)
-      onSubmit(data)
-    },
-  })
-
+export default ({ visible, formik, onBack }: TProps) => {
   return (
     <WizardStep visible={visible}>
       <AppH2>Terms and conditions</AppH2>
