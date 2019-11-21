@@ -14,8 +14,8 @@ import {
   PaddedButtonText,
 } from '../layout/Buttons'
 import { AppSelect } from '../layout/AppSelect'
-import { AppCheckbox, AppCheckboxContainer } from '../layout/AppCheckbox'
 import { TSubscriptionOptionsData } from './formiks'
+import { AppCustomCheckbox } from '../layout/AppCustomCheckbox'
 
 type TProps = {
   visible: boolean
@@ -67,16 +67,12 @@ export default ({ visible, formik }: TProps) => {
           </AppValidationError>
         </AppFormGroup>
         <AppFormGroup>
-          <AppCheckboxContainer>
-            <AppCheckbox
-              id="pay-upfront"
-              name="payUpfront"
-              value={formik.values.payUpfront as any}
-              onChange={formik.handleChange}
-              valid={!(formik.touched.payUpfront && formik.errors.payUpfront)}
-            />
-            <AppLabel htmlFor="pay-upfront">Upfront payment?</AppLabel>
-          </AppCheckboxContainer>
+          <AppCustomCheckbox
+            id="pay-upfront"
+            name="payUpfront"
+            formik={formik}
+            label="Upfront payment?"
+          />
           <AppValidationError>
             {formik.touched.payUpfront && formik.errors.payUpfront}
           </AppValidationError>
