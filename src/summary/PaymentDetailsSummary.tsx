@@ -15,10 +15,9 @@ export const PaymentDetailsSummary = ({
   data: TPaymentDetailsData
 }) => {
   const cardEnds = data.creditCardNumber.slice(-4)
-  const formattedExpiry = format(
-    new Date(data.creditCardExpires),
-    'do MMM yyyy'
-  )
+  const formattedExpiry = !!data.creditCardExpires
+    ? format(new Date(data.creditCardExpires), 'do MMM yyyy')
+    : ''
 
   return (
     <SummarySection>

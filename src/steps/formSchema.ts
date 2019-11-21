@@ -42,7 +42,9 @@ export const paymentDetailsFormSchema = yup.object().shape({
   creditCardExpires: yup
     .date()
     .required('Expiry date is required')
-    .typeError('Expiry date must be a date'),
+    .typeError('Expiry date must be a date')
+    .min(new Date(), 'Expiry date must be in the future')
+    .nullable(),
   creditCardSecurityCode: yup
     .string()
     .required('Security code is required')
