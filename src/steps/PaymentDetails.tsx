@@ -16,6 +16,7 @@ import {
   PaddedButtonText,
 } from '../layout/Buttons'
 import { TPaymentDetailsData } from './formiks'
+import { AppDateSelect } from '../layout/AppDateSelect'
 
 type TProps = {
   visible: boolean
@@ -48,19 +49,10 @@ export default ({ visible, formik, onBack }: TProps) => {
         </AppFormGroup>
         <AppFormGroup>
           <AppLabel htmlFor="credit-card-expires">Expires</AppLabel>
-          <AppInput
-            type="date"
+          <AppDateSelect
             id="credit-card-expires"
             name="creditCardExpires"
-            value={formik.values.creditCardExpires}
-            onChange={formik.handleChange}
-            placeholder="YYYY-MM-DD"
-            valid={
-              !(
-                formik.touched.creditCardExpires &&
-                formik.errors.creditCardExpires
-              )
-            }
+            formik={formik}
           />
           <AppValidationError>
             {formik.touched.creditCardExpires &&

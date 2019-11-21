@@ -39,7 +39,10 @@ export const paymentDetailsFormSchema = yup.object().shape({
     .string()
     .required('Credit card number is required')
     .matches(/^\d+$/, 'Credit card number must be a number'),
-  creditCardExpires: yup.string().required('Expiry date is required'),
+  creditCardExpires: yup
+    .date()
+    .required('Expiry date is required')
+    .typeError('Expiry date must be a date'),
   creditCardSecurityCode: yup
     .string()
     .required('Security code is required')
