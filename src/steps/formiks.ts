@@ -57,7 +57,7 @@ export const usePaymentDetailsFormik = (
   return useFormik<TPaymentDetailsData>({
     initialValues: {
       creditCardNumber: '',
-      creditCardExpires: '',
+      creditCardExpires: null,
       creditCardSecurityCode: '',
     },
     validationSchema: paymentDetailsFormSchema,

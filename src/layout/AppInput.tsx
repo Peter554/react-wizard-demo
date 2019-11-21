@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const AppInput = styled.input<{ valid: boolean }>`
+export const appInputCss = css<{ valid: boolean }>`
   display: block;
   width: 100%;
   height: 2rem;
@@ -21,4 +21,8 @@ export const AppInput = styled.input<{ valid: boolean }>`
         ? props.theme.colors.inputBorderFocus
         : props.theme.colors.error};
   }
+`
+
+export const AppInput = styled.input<{ valid: boolean }>`
+  ${appInputCss}
 `

@@ -16,6 +16,8 @@ import {
   PaddedButtonText,
 } from '../layout/Buttons'
 import { TPaymentDetailsData } from './formiks'
+import { AppDateSelect } from '../layout/AppDateSelect'
+import { AppCreditCard } from '../layout/AppCreditCard'
 
 type TProps = {
   visible: boolean
@@ -30,17 +32,10 @@ export default ({ visible, formik, onBack }: TProps) => {
       <AppForm id="payment-details-form" onSubmit={formik.handleSubmit}>
         <AppFormGroup>
           <AppLabel htmlFor="credit-card-number">Card number</AppLabel>
-          <AppInput
+          <AppCreditCard
             id="credit-card-number"
             name="creditCardNumber"
-            value={formik.values.creditCardNumber}
-            onChange={formik.handleChange}
-            valid={
-              !(
-                formik.touched.creditCardNumber &&
-                formik.errors.creditCardNumber
-              )
-            }
+            formik={formik}
           />
           <AppValidationError>
             {formik.touched.creditCardNumber && formik.errors.creditCardNumber}
@@ -48,19 +43,10 @@ export default ({ visible, formik, onBack }: TProps) => {
         </AppFormGroup>
         <AppFormGroup>
           <AppLabel htmlFor="credit-card-expires">Expires</AppLabel>
-          <AppInput
-            type="date"
+          <AppDateSelect
             id="credit-card-expires"
             name="creditCardExpires"
-            value={formik.values.creditCardExpires}
-            onChange={formik.handleChange}
-            placeholder="YYYY-MM-DD"
-            valid={
-              !(
-                formik.touched.creditCardExpires &&
-                formik.errors.creditCardExpires
-              )
-            }
+            formik={formik}
           />
           <AppValidationError>
             {formik.touched.creditCardExpires &&
