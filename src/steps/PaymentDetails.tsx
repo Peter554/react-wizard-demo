@@ -77,7 +77,7 @@ export default ({ visible, formik, onBack }: TProps) => {
       <ButtonBar>
         <AppPrimaryButton type="submit" form="payment-details-form">
           <PaddedButtonText>Next</PaddedButtonText>
-          <Volume2 color="white" size="1.25rem" />
+          <Volume2 color="white" size={20} />
         </AppPrimaryButton>
         <AppMutedButton onClick={onBack}>Back</AppMutedButton>
       </ButtonBar>

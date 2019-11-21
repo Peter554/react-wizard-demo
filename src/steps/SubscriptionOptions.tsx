@@ -81,7 +81,7 @@ export default ({ visible, formik }: TProps) => {
       <ButtonBar>
         <AppPrimaryButton type="submit" form="subscription-options-form">
           <PaddedButtonText>Next</PaddedButtonText>
-          <Volume2 color="white" size="1.25rem" />
+          <Volume2 color="white" size={20} />
         </AppPrimaryButton>
       </ButtonBar>
     </WizardStep>

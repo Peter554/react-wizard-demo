@@ -14,7 +14,7 @@ export const Greeting = withTheme(({ theme }: { theme: DefaultTheme }) => {
           href="https://github.com/Peter554/react-wizard-demo"
           target="_blank"
         >
-          <Music size="2rem" />
+          <Music size={32} />
         </IconLink>
         sign up
       </AppH1>
