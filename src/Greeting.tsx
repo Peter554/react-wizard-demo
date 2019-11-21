@@ -1,15 +1,22 @@
 import React from 'react'
 import { Music } from 'react-feather'
+import styled, { withTheme, DefaultTheme } from 'styled-components'
 
 import { AppH1 } from './layout/AppHeadings'
 import { AppHr } from './layout/AppHr'
-import { withTheme, DefaultTheme } from 'styled-components'
 
 export const Greeting = withTheme(({ theme }: { theme: DefaultTheme }) => {
   return (
     <React.Fragment>
       <AppH1>
-        MoBeats <Music size="1.75rem" color={theme.colors.primary} /> sign up
+        MoBeats
+        <IconLink
+          href="https://github.com/Peter554/react-wizard-demo"
+          target="_blank"
+        >
+          <Music size="2rem" />
+        </IconLink>
+        sign up
       </AppH1>
       <p>
         Thanks for signing up to MoBeats! Just fill out this form and we'll get
@@ -20,3 +27,16 @@ export const Greeting = withTheme(({ theme }: { theme: DefaultTheme }) => {
     </React.Fragment>
   )
 })
+
+const IconLink = styled.a`
+  padding: 0.5rem;
+
+  color: ${props => props.theme.colors.primary}
+
+  &:focus,
+  &:active,
+  &:hover {
+    outline: none;
+    color: ${props => props.theme.colors.primaryFocus}
+  }
+`
