@@ -54,6 +54,7 @@ export default ({ visible, formik, onBack }: TProps) => {
             name="creditCardExpires"
             value={formik.values.creditCardExpires}
             onChange={formik.handleChange}
+            placeholder="YYYY-MM-DD"
             valid={
               !(
                 formik.touched.creditCardExpires &&
