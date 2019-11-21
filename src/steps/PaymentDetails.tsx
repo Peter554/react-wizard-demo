@@ -17,6 +17,7 @@ import {
 } from '../layout/Buttons'
 import { TPaymentDetailsData } from './formiks'
 import { AppDateSelect } from '../layout/AppDateSelect'
+import { AppCreditCard } from '../layout/AppCreditCard'
 
 type TProps = {
   visible: boolean
@@ -31,17 +32,10 @@ export default ({ visible, formik, onBack }: TProps) => {
       <AppForm id="payment-details-form" onSubmit={formik.handleSubmit}>
         <AppFormGroup>
           <AppLabel htmlFor="credit-card-number">Card number</AppLabel>
-          <AppInput
+          <AppCreditCard
             id="credit-card-number"
             name="creditCardNumber"
-            value={formik.values.creditCardNumber}
-            onChange={formik.handleChange}
-            valid={
-              !(
-                formik.touched.creditCardNumber &&
-                formik.errors.creditCardNumber
-              )
-            }
+            formik={formik}
           />
           <AppValidationError>
             {formik.touched.creditCardNumber && formik.errors.creditCardNumber}
