@@ -3,7 +3,6 @@ import { UseFormik } from 'formik'
 import { Volume2 } from 'react-feather'
 
 import { WizardStep } from '../layout/WizardStep'
-import { AppLabel } from '../layout/AppLabel'
 import { AppFormGroup } from '../layout/AppFormGroup'
 import { AppForm } from '../layout/AppForm'
 import { AppValidationError } from '../layout/AppValidationError'

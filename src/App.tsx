@@ -16,12 +16,7 @@ import { Greeting } from './Greeting'
 import './css/reset.css'
 import './css/global.css'
 import { theme } from './theme'
-import {
-  subscriptionOptionsFormSchema,
-  userDetailsFormSchema,
-  paymentDetailsFormSchema,
-  termsAndConditionsFormSchema,
-} from './steps/formSchema'
+import { logOnComplete } from './logOnComplete'
 
 export default () => {
   const step = useStep()
@@ -39,20 +34,12 @@ export default () => {
   })
 
   const termsAndConditionsFormik = useTermsAndConditionsFormik(() => {
-    const toLog = {
-      subscriptionOptions: subscriptionOptionsFormSchema.cast(
-        subscriptionOptionsFormik.values
-      ),
-      userDetails: userDetailsFormSchema.cast(userDetailsFormik.values),
-      paymentDetails: paymentDetailsFormSchema.cast(
-        paymentDetailsFormik.values
-      ),
-      termsAndConditions: termsAndConditionsFormSchema.cast(
-        termsAndConditionsFormik.values
-      ),
-    }
-    console.log(JSON.stringify(toLog, null, 2))
-    alert('Your form has now been submitted.')
+    logOnComplete({
+      subscriptionOptionsFormik,
+      userDetailsFormik,
+      paymentDetailsFormik,
+      termsAndConditionsFormik,
+    })
   })
 
   return (

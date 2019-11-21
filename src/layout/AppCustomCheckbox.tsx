@@ -20,7 +20,7 @@ export const AppCustomCheckbox = ({
   label: string
 }) => {
   const checked = formik.values[name]
-  const error = formik.touched[name] && formik.errors[name]
+  // const error = formik.touched[name] && formik.errors[name]
 
   return (
     <Label>
