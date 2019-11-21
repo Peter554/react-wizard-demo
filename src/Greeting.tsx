@@ -20,7 +20,7 @@ export const Greeting = withTheme(({ theme }: { theme: DefaultTheme }) => {
       </AppH1>
       <p>
         Thanks for signing up to MoBeats! Just fill out this form and we'll get
-        you up and running in no time. You'll be changed $2 per month per GB.
+        you up and running in no time. You'll be charged $2 per month per GB.
         And there's a 10% discount if you can make the payment now!
       </p>
       <AppHr />
